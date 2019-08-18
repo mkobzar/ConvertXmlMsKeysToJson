@@ -40,13 +40,15 @@ namespace xmlToJson
                             {
                                 if (!string.IsNullOrWhiteSpace(k.Text) && !k.Text.Contains("<") && !k.Text.Contains("key"))
                                 {
-                                    if (!keysd.ContainsKey(k.Text))
+                                    var thisKey = k.Text.Replace("\r\n", "").Trim();
+                                    var thisName = p.Name.Replace("\r\n", "").Trim();
+                                    if (!keysd.ContainsKey(thisKey))
                                     {
-                                        keysd.Add(k.Text, new List<string> { p.Name });
+                                        keysd.Add(thisKey, new List<string> { thisName });
                                     }
-                                    else if (!keysd[k.Text].Contains(p.Name))
+                                    else if (!keysd[thisKey].Contains(thisName))
                                     {
-                                        keysd[k.Text].Add(p.Name);
+                                        keysd[thisKey].Add(thisName);
                                     }
                                 }
                             });
